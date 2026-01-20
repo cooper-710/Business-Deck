@@ -3,7 +3,7 @@
   "outputDirectory": "build",
   "headers": [
     {
-      "source": "/(.*\\.(mp4|mov|webm|ogg))",
+      "source": "/*.(mp4|mov|webm|ogg)",
       "headers": [
         {
           "key": "Content-Type",
