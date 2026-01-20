@@ -106,7 +106,7 @@ export function UnifiedSystem() {
   }, []);
 
   return (
-    <div ref={ref} className="relative min-h-[150vh] pt-32" style={{ marginTop: '-200px' }}>
+    <div ref={ref} className="relative min-h-[150vh] pt-32" style={{ marginTop: '-100px' }}>
       <div className="sticky top-0 h-screen flex items-center justify-center px-8">
         <div className="max-w-[1800px] w-full">
           <motion.div 

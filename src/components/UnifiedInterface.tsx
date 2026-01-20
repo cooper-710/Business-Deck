@@ -12,7 +12,7 @@ export function UnifiedInterface() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={ref} className="min-h-screen flex items-center justify-center px-8 pb-32 pt-0" style={{ marginTop: '-100px', marginBottom: '-250px' }}>
+    <div ref={ref} className="min-h-screen flex items-center justify-center px-8 pb-32 pt-0" style={{ marginTop: '-100px', marginBottom: '-125px', paddingBottom: '60px' }}>
       <motion.div 
         style={{ y: textY, opacity: textOpacity }}
         className="text-center max-w-6xl mx-auto"
@@ -22,7 +22,7 @@ export function UnifiedInterface() {
               <br />
               <span className="text-gray-400">unified interface</span>
             </h2>
-            <p className="text-3xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
+            <p className="text-3xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-8">
               Everything you need in one place. Motion capture, analytics, biomechanics, and ball tracking, all seamlessly integrated into a single, cohesive experience.
             </p>
       </motion.div>
