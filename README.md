@@ -1,7 +1,7 @@
 
-  # Immersive Investor Experience
+# Simi Business Deck
 
-  This is a code bundle for Immersive Investor Experience. The original project is available at https://www.figma.com/design/IPIBi4YmiPg3qIk3JdXZBu/Immersive-Investor-Experience.
+This is a code bundle for Simi Business Deck. The original project is available at https://www.figma.com/design/IPIBi4YmiPg3qIk3JdXZBu/Immersive-Investor-Experience.
 
   ## Running the code
 
