@@ -116,7 +116,7 @@ export function UnifiedSystem() {
             <div className="aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl bg-black relative">
               <video
                 ref={dashboardVideoRef}
-                src="/Dashboard.mov"
+                src="/Dashboard.mp4"
                 className="w-full h-full object-cover"
                 controls
                 muted

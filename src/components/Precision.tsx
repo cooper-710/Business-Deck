@@ -220,7 +220,7 @@ export function Precision() {
             <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
               <video
                 ref={baseballVideoRef}
-                src="/Baseball.mov"
+                src="/Baseball.mp4"
                 className="w-full h-full object-cover"
                 controls
                 muted

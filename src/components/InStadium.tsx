@@ -677,7 +677,7 @@ export function InStadium() {
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
             <video
               ref={baseballingameVideoRef}
-              src="/New.mov"
+              src="/New.mp4"
               className="w-full h-full object-cover"
               controls
               muted
@@ -737,7 +737,7 @@ export function InStadium() {
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
             <video
               ref={socceringameVideoRef}
-              src="/socceringame.mov"
+              src="/socceringame.mp4"
               className="w-full h-full object-cover"
               controls
               muted
@@ -764,7 +764,7 @@ export function InStadium() {
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
             <video
               ref={baseballingame2VideoRef}
-              src="/baseballingame2.mov"
+              src="/Baseballingame2.mp4"
               className="w-full h-full object-cover"
               controls
               muted
@@ -791,7 +791,7 @@ export function InStadium() {
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
             <video
               ref={basketballingameVideoRef}
-              src="/basketballingame.mov"
+              src="/basketballingame.mp4"
               className="w-full h-full object-cover"
               controls
               muted
@@ -818,7 +818,7 @@ export function InStadium() {
           <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black relative">
             <video
               ref={soccerVideoRef}
-              src="/soccer.mov"
+              src="/soccer.mp4"
               className="w-full h-full object-cover"
               controls
               muted

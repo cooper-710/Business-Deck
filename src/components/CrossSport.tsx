@@ -116,7 +116,7 @@ export function CrossSport() {
           <div className="w-full h-full bg-black relative">
             <video
               ref={hockeyVideoRef}
-              src="/Hockey.mov"
+              src="/Hockey.mp4"
               className="w-full h-full object-cover"
               controls
               muted
