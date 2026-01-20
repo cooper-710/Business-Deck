@@ -1,0 +1,149 @@
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useEffect } from 'react';
+
+// Video file in public folder
+const videoPath = '/202601182132.mp4?v=2';
+
+export function InstagramVideo() {
+  const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const videoScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.85]);
+  const textY = useTransform(scrollYProgress, [0, 0.3], [100, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
+  // Ensure video plays and loops continuously (but respect user interaction)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      let userPaused = false;
+      let isUserInteracting = false;
+
+      const playVideo = () => {
+        if (video.paused && !video.ended && !userPaused) {
+          video.play().catch(() => {
+            setTimeout(() => {
+              if (video.paused && !userPaused) {
+                video.play().catch(() => {});
+              }
+            }, 100);
+          });
+        }
+      };
+
+      const handleUserInteraction = () => {
+        isUserInteracting = true;
+        setTimeout(() => {
+          isUserInteracting = false;
+        }, 100);
+      };
+
+      const handlePause = () => {
+        if (!video.ended && !isUserInteracting) {
+          setTimeout(() => {
+            if (video.paused && !userPaused && !isUserInteracting) {
+              playVideo();
+            }
+          }, 100);
+        } else {
+          userPaused = true;
+        }
+      };
+
+      const handlePlay = () => {
+        userPaused = false;
+      };
+
+      const handleSeeking = () => {
+        userPaused = true;
+        isUserInteracting = true;
+        setTimeout(() => {
+          isUserInteracting = false;
+        }, 500);
+      };
+
+      const handleSeeked = () => {
+        setTimeout(() => {
+          userPaused = false;
+        }, 1000);
+      };
+
+      if (video.readyState >= 2) {
+        playVideo();
+      } else {
+        video.addEventListener('canplay', playVideo, { once: true });
+        video.addEventListener('loadeddata', playVideo, { once: true });
+      }
+
+      video.addEventListener('pause', handlePause);
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('seeking', handleSeeking);
+      video.addEventListener('seeked', handleSeeked);
+      video.addEventListener('click', handleUserInteraction);
+      video.addEventListener('touchstart', handleUserInteraction);
+
+      const handleEnded = () => {
+        userPaused = false;
+        video.currentTime = 0;
+        playVideo();
+      };
+
+      video.addEventListener('ended', handleEnded);
+
+      return () => {
+        video.removeEventListener('canplay', playVideo);
+        video.removeEventListener('loadeddata', playVideo);
+        video.removeEventListener('pause', handlePause);
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('seeking', handleSeeking);
+        video.removeEventListener('seeked', handleSeeked);
+        video.removeEventListener('click', handleUserInteraction);
+        video.removeEventListener('touchstart', handleUserInteraction);
+        video.removeEventListener('ended', handleEnded);
+      };
+    }
+  }, []);
+
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.error('Video loading error:', e);
+    const video = e.currentTarget;
+    console.error('Video error details:', {
+      error: video.error,
+      networkState: video.networkState,
+      readyState: video.readyState,
+      src: video.src
+    });
+  };
+
+  return (
+    <div ref={ref} className="relative min-h-[150vh] py-32">
+      <div className="sticky top-0 h-screen flex items-center justify-center px-8">
+        <div className="max-w-[1800px] w-full">
+          <motion.div 
+            style={{ scale: videoScale, opacity: textOpacity }}
+            className="relative mb-16 flex justify-center"
+          >
+            <div className="overflow-hidden bg-black flex items-center justify-center" style={{ width: '400px', height: '700px', flexShrink: 0 }}>
+              <video
+                ref={videoRef}
+                src={videoPath}
+                style={{ width: '400px', height: '700px', objectFit: 'cover', border: 'none', outline: 'none' }}
+                loop
+                muted
+                playsInline
+                controls
+                autoPlay
+                onError={handleVideoError}
+                preload="auto"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
